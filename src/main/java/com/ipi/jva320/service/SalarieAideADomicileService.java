@@ -13,7 +13,6 @@ import jakarta.persistence.EntityExistsException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
@@ -107,7 +106,7 @@ public class SalarieAideADomicileService {
         return salarieAideADomicileRepository.save(salarieAideADomicile);
     }
 
-    public void deleteSalarieAideADomicile(Long id)
+    public SalarieAideADomicile deleteSalarieAideADomicile(Long id)
             throws SalarieException, EntityExistsException {
         if (id == null) {
             throw new SalarieException("L'id doit être fourni");
@@ -117,6 +116,7 @@ public class SalarieAideADomicileService {
             throw new SalarieException("Le salarié n'existe pas déjà d'id " + id); // TODO id ou nom ??
         }
         salarieAideADomicileRepository.deleteById(id);
+        return null;
     }
 
     /**
@@ -148,7 +148,7 @@ public class SalarieAideADomicileService {
         // moyenne annuelle des congés pris :
         Double partCongesPrisTotauxAnneeNMoins1 = salarieAideADomicileRepository.partCongesPrisTotauxAnneeNMoins1();
 
-        // si la moyenne actuelle des congés pris diffère de 20% de la la proportion selon l'avancement dans l'année
+        // si la moyenne actuelle des congés pris diffère de 20% de la proportion selon l'avancement dans l'année
         // pondérée avec poids plus gros sur juillet et août (20 vs 8),
         // bonus ou malus de 20% de la différence pour aider à équilibrer la moyenne actuelle des congés pris :
         double proportionMoisEnCours = ((premierJourDeConge.getMonthValue()

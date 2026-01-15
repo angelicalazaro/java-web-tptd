@@ -47,15 +47,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Jeanne Dupond</td>
-          <td><a href="/salaries/aide/2" class="btn btn-primary ember-view">Détail</a></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Robert Martin</td>
-          <td><a href="/salaries/aide/3" class="btn btn-primary ember-view">Détail</a></td>
+        <tr th:each="salarie : ${salaries}">
+          <th scope="row" th:text="${salarie.id}">1</th>
+          <td th:text="${salarie.nom}">Jeanne Dupond</td>
+          <td><a th:href="@{/salaries/{id}(id=${salarie.id})}"
+                 href="/salaries/aide/2" class="btn btn-primary ember-view">Détail</a></td>
         </tr>
         </tbody>
       </table>
