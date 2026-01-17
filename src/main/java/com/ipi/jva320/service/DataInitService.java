@@ -30,5 +30,41 @@ public class DataInitService implements CommandLineRunner {
                 new SalarieAideADomicile("Jeannette", LocalDate.parse("2022-12-05"), LocalDate.parse("2022-12-05"),
                         20, 0,
                         80, 10, 1));
+        SalarieAideADomicile s3 = this.salarieAideADomicileService.creerSalarieAideADomicile(
+                new SalarieAideADomicile("Maria", LocalDate.parse("2022-12-05"), LocalDate.parse("2022-12-05"),
+                        20, 0,
+                        80, 10, 1));
+        SalarieAideADomicile s4 = this.salarieAideADomicileService.creerSalarieAideADomicile(
+                new SalarieAideADomicile("Carlos", LocalDate.parse("2022-12-05"), LocalDate.parse("2022-12-05"),
+                        20, 0,
+                        80, 10, 1));
+        SalarieAideADomicile s5 = this.salarieAideADomicileService.creerSalarieAideADomicile(
+                new SalarieAideADomicile("Antonio", LocalDate.parse("2022-12-05"), LocalDate.parse("2022-12-05"),
+                        20, 0,
+                        80, 10, 1));
+        SalarieAideADomicile s6 = this.salarieAideADomicileService.creerSalarieAideADomicile(
+                new SalarieAideADomicile("Fernanda", LocalDate.parse("2022-12-05"), LocalDate.parse("2022-12-05"),
+                        20, 0,
+                        80, 10, 1));
+        SalarieAideADomicile s7 = this.salarieAideADomicileService.creerSalarieAideADomicile(
+                new SalarieAideADomicile("Amir", LocalDate.parse("2022-12-05"), LocalDate.parse("2022-12-05"),
+                        20, 0,
+                        80, 10, 1));
+        SalarieAideADomicile s8 = this.salarieAideADomicileService.creerSalarieAideADomicile(
+                new SalarieAideADomicile("Marco", LocalDate.parse("2022-12-05"), LocalDate.parse("2022-12-05"),
+                        20, 0,
+                        80, 10, 1));
+        SalarieAideADomicile s9 = this.salarieAideADomicileService.creerSalarieAideADomicile(
+                new SalarieAideADomicile("Adrian", LocalDate.parse("2022-12-05"), LocalDate.parse("2022-12-05"),
+                        20, 0,
+                        80, 10, 1));
+        SalarieAideADomicile s10 = this.salarieAideADomicileService.creerSalarieAideADomicile(
+                new SalarieAideADomicile("Luis", LocalDate.parse("2022-12-05"), LocalDate.parse("2022-12-05"),
+                        20, 0,
+                        80, 10, 1));
+        SalarieAideADomicile s11 = this.salarieAideADomicileService.creerSalarieAideADomicile(
+                new SalarieAideADomicile("Alexandra", LocalDate.parse("2022-12-05"), LocalDate.parse("2022-12-05"),
+                        20, 0,
+                        80, 10, 1));
     }
 }

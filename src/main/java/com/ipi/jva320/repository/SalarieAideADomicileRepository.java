@@ -18,5 +18,5 @@ public interface SalarieAideADomicileRepository extends CrudRepository<SalarieAi
     @Query("select sum(congesPayesPrisAnneeNMoins1)/sum(congesPayesAcquisAnneeNMoins1) from SalarieAideADomicile")
     Double partCongesPrisTotauxAnneeNMoins1();
 
-    List<SalarieAideADomicile> findAllByNom(String nom, Pageable pageable);
+    List<SalarieAideADomicile> findAllByNomContainingIgnoreCase(String nom, Pageable pageable);
 }
