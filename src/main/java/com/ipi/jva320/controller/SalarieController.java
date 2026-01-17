@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,14 +31,23 @@ public class SalarieController {
     }
 
     @PostMapping("/salaries/save")
-    public String saveSalarie(SalarieAideADomicile salarie) throws SalarieException {
+    public String saveSalarie(
+            @ModelAttribute SalarieAideADomicile salarie,
+            BindingResult bindingResult,
+            ModelMap model
+    ) throws SalarieException {
+        if (bindingResult.hasErrors()) {
+            return "detail_Salarie";
+        }
         salarie = salarieAideADomicileService.creerSalarieAideADomicile(salarie);
         return "redirect:/salaries/" + salarie.getId();
     }
 
     @GetMapping("salaries/aide/new")
     public String addSalarie(final ModelMap model) {
-        return "add_Salarie";
+        SalarieAideADomicile salarie = new SalarieAideADomicile();
+        model.put("salarie", salarie);
+        return "detail_Salarie";
     }
 
     @GetMapping("/salaries")
@@ -51,6 +61,20 @@ public class SalarieController {
         model.put("salaries", salaries);
         model.put("recherche", nom);
         return "list";
+    }
+    @PostMapping("/salaries/{id}")
+    public String updateSalarie(
+            @PathVariable Long id,
+            @ModelAttribute SalarieAideADomicile salarie,
+            BindingResult bindingResult,
+            ModelMap model
+    ) throws SalarieException {
+        if (bindingResult.hasErrors()) {
+            return "detail_Salarie";
+        }
+        salarie.setId(id);
+        salarie = salarieAideADomicileService.updateSalarieAideADomicile(salarie);
+        return "redirect:/salaries/" + salarie.getId();
     }
 
     @GetMapping("/salaries/{id}/delete")

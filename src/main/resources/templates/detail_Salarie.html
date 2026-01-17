@@ -33,9 +33,9 @@
 <div class="container">
     <div th:text="#{msg.salarie}"></div><!-- TODO better messages example -->
 
-    <h2>Détail du salarié</h2>
+    <h2 th:text="${salarie.id == null ? 'Créer un nouveau salarié : 'Modifier les informations du salarié'}">Détail du salarié</h2>
     
-    <form id="saveForm" action="http://localhost:8080/salaries/aide/10" method="post" class="row">
+    <form id="saveForm" th:action="@{${salarie.id == null ? '/salaries/save' : '/salaries/' + salarie.id}}" action="http://localhost:8080/salaries/aide/10" method="post" class="row">
 
         <div class="col-lg-6">
             <div class="form-group">
@@ -43,7 +43,7 @@
                 <input type="text" th:value="${salarie.id}" value="10" class="form-control" name="id" id="id" disabled="true">
 
                 <label class="form-control-label" for="nom">Nom</label>
-                <input type="text" th:value="${salarie.nom} ?: '' " value="Jean Dupont" class="form-control" name="nom" id="nom">
+                <input type="text" th:value="${salarie.nom} ?: '' " placeholder="Ex. Jean Dupont" class="form-control" name="nom" id="nom">
 
                 <label class="form-control-label" for="moisEnCours">moisEnCours</label>
                 <input type="date" th:value="${salarie.moisEnCours} ?: '' " value="03/2023" class="form-control" name="moisEnCours"
@@ -118,14 +118,14 @@
     <div class="row">
         <div class="col-lg-6">
             <ul class="list-group list-unstyled">
-                <li class="alert alert-danger" role="alert">Erreur dans un champ !</li>
+                <li class="alert alert-danger" th:each="err : ${#fields.errors('global')}" th:text="${err}" role="alert">Erreur dans un champ !</li>
             </ul>
         </div>
     </div>
     <div class="row mt-2">
         <div class="col-lg-6">
-            <input form="saveForm" class="btn btn-primary" type="submit" value="Enregistrer">
-            <a th:href="@{/salaries/{id}/delete(id=${salarie.id})}" href="/salaries/10/delete" class="btn btn-danger">Supprimer</a>
+            <input form="saveForm" class="btn btn-primary" type="submit" th:value="${salarie.id == null ? 'Créer' : 'Enregistrer'}" value="Enregistrer">
+            <a th:if="${salarie.id != null}" th:href="@{/salaries/{id}/delete(id=${salarie.id})}" href="/salaries/10/delete" class="btn btn-danger">Supprimer</a>
         </div>
     </div>
 
