@@ -33,7 +33,7 @@
 <div class="container">
     <div th:text="#{msg.salarie}"></div><!-- TODO better messages example -->
 
-    <h2 th:text="${salarie.id == null ? 'Créer un nouveau salarié : 'Modifier les informations du salarié'}">Détail du salarié</h2>
+    <h2 th:text="${salarie.id == null ? 'Créer un nouveau salarié' : 'Modifier les informations du salarié'}">Détail du salarié</h2>
     
     <form id="saveForm" th:action="@{${salarie.id == null ? '/salaries/save' : '/salaries/' + salarie.id}}" action="http://localhost:8080/salaries/aide/10" method="post" class="row">
 
@@ -115,10 +115,10 @@
         
     </form>
     
-    <div class="row">
+    <div class="row" th:if="${bindingResult != null && bindingResult.hasErrors()}">
         <div class="col-lg-6">
             <ul class="list-group list-unstyled">
-                <li class="alert alert-danger" th:each="err : ${#fields.errors('global')}" th:text="${err}" role="alert">Erreur dans un champ !</li>
+                <li class="alert alert-danger" th:each="err : ${bindingResult.allErrors}" th:text="${err.defaultMessage}" role="alert">Erreur dans un champ !</li>
             </ul>
         </div>
     </div>
@@ -129,9 +129,9 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" th:if="${bindingResult != null && bindingResult.hasErrors()}">
     <table>
-        <tr><td class="alert alert-danger" role="alert">Erreur de type de données !</td></tr>
+        <tr><td class="alert alert-danger" th:each="err : ${#fields.errors('global')}" th:text="${err}" role="alert">Erreur de type de données !</td></tr>
     </table>
     <div>Erreur globale spécifique !</div>
     </div>
